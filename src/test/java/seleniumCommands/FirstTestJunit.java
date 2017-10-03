@@ -1,13 +1,15 @@
-package seleniumIBMLearningArtifactId;
+package seleniumCommands;
 
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class FirstTest {
+public class FirstTestJunit {
 
-	public static void main(String[] args) {
+	@Test	//Junit annotation
+	public void firstTest(){
 		System.setProperty("webdriver.gecko.driver", "C:\\geckodriverX64.exe");
 		WebDriver driver = new FirefoxDriver();
 		driver.get("https://google.com");
@@ -19,7 +21,6 @@ public class FirstTest {
 		element.click();
 		
 		System.out.println("Test completed");
-
 
 	}
 
