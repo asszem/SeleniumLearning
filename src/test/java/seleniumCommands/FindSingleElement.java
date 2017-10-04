@@ -7,23 +7,32 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import drivers.FirefoxWebDriver;
 
-public class FindElementsMethodsOnIBM {
+/**
+ * 
+ * @author Andras Olah
+ * 
+ * Find single element by various locator methods on IBM.com
+ */
+public class FindSingleElement {
 	static WebDriver driver;
 
-	@BeforeClass //Runs only once, must be static
+	@BeforeClass // Runs only once, must be static
 	public static void pageSetup() {
+		System.out.println("Find Single Element on IBM.com started");
 		driver = new FirefoxWebDriver().initializeFirefoxWebDriver();
 		driver.get("https://ibm.com");
 	}
 
 	@AfterClass
 	public static void closeFirefox() {
-		driver.quit();
+		//TODO find out why it results incorrect HTTP status
+//		driver.quit();
 	}
 
 	@Test
@@ -34,14 +43,19 @@ public class FindElementsMethodsOnIBM {
 		System.out.println("By Id, get \"class\" attribute=" + element.getAttribute("class"));
 	}
 
-	@Ignore
+	@Test
+	public void by_LinkText(){
+		WebElement element = driver.findElement(By.linkText("Products"));
+	}
+	
+	//@Ignore
 	@Test
 	public void by_Class() {
-		WebElement element = driver.findElement(By.className("ibm-animate"));
+		WebElement element = driver.findElement(By.className("ibm-masthead-categories"));
 		System.out.println("By ClassName=" + element.getText());
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void by_xPath() {
 		String xPathExpression = ".//*[@id='ibm-home']/a";
@@ -64,6 +78,23 @@ public class FindElementsMethodsOnIBM {
 		for (WebElement link : allLinks) {
 			// System.out.println(link.getText());
 		}
+	}
+
+	@Test
+	public void by_Name(){
+		WebElement element = driver.findElement(By.name("q"));
+	}
+
+	@Test
+	public void by_Title() {
+		 driver.getTitle().contains("IBM");
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	public void by_Missing_Element(){	
+		WebElement element = driver.findElement(By.className("Should be missing"));
+		System.out.println("Element by name \'Should be missing\' is actually missing");
 
 	}
+
 }

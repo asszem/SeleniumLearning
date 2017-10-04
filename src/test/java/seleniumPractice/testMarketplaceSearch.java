@@ -45,8 +45,15 @@ public class testMarketplaceSearch {
 		// Verify if page loads
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// TODO wait until page fully loads before making the assertion
+		try {
+			int sleepTime = 50;
+			System.out.println("Thread sleeps " + sleepTime);
+			Thread.sleep(sleepTime);
+			System.out.println("Thread wakes");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Page title=" + driver.getTitle());
-		assertTrue(driver.getTitle().contains("Marketplace"));
 
 		ExpectedCondition<Boolean> doesTitleContain = ExpectedConditions.titleContains("Marketplace");
 		System.out.println("Does Title Contain Marketplace? = " + doesTitleContain.apply(driver));
@@ -54,6 +61,7 @@ public class testMarketplaceSearch {
 			System.out.println("Waiting...");
 		}
 		System.out.println("Does Title Contain Marketplace? = " + doesTitleContain.apply(driver));
+		assertTrue(driver.getTitle().contains("Marketplace"));
 
 		// Wait until search field is loaded
 		String marketPlaceSearchFieldXpath = ".//*[@id='search-primary']/div/div[2]/form/div[2]/input";

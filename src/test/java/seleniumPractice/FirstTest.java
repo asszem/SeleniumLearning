@@ -1,17 +1,17 @@
-package seleniumCommands;
+package seleniumPractice;
 
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class FirstTestJunit {
+import drivers.FirefoxWebDriver;
 
-	@Test	//Junit annotation
-	public void firstTest(){
+public class FirstTest {
+
+	public static void main(String[] args) {
 		System.setProperty("webdriver.gecko.driver", "C:\\geckodriverX64.exe");
-		WebDriver driver = new FirefoxDriver();
+		WebDriver driver=new FirefoxWebDriver().initializeFirefoxWebDriver();
 		driver.get("https://google.com");
 		
 		WebElement element = driver.findElement(By.id("lst-ib"));
