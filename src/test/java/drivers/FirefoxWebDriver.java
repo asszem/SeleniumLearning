@@ -26,7 +26,7 @@ public class FirefoxWebDriver {
 		if (OS.contains("mac")) {
 			System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/firefox/osx/geckodriver");
 		} else if (OS.contains("windows")) {
-			System.out.println("Windows GeckoDriver started");
+			System.out.println("Windows GeckoDriverX64 started");
 			System.setProperty("webdriver.gecko.driver", "C:\\geckodriverX64.exe");
 		}
 

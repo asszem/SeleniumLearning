@@ -56,7 +56,6 @@ public class FindElementsMethodsOnIBM {
 			System.out.println("Thread sleeps " + sleepTime);
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(driver.getTitle());

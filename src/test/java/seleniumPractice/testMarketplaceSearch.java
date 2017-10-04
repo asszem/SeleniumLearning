@@ -1,5 +1,7 @@
 package seleniumPractice;
 
+import static org.junit.Assert.*;
+
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -32,7 +34,7 @@ public class testMarketplaceSearch {
 
 	@Test
 	public void testMarketplaceSearchForZ14() {
-
+		System.out.println("Market Place Search started");
 		// Locate the Marketplace button
 		String marketPlaceButtonXpath = ".//*[@id='ibm-universal-nav']/nav/div[2]/p/a";
 		WebElement marketPlaceButton = driver.findElement(By.xpath(marketPlaceButtonXpath));
@@ -41,7 +43,10 @@ public class testMarketplaceSearch {
 		marketPlaceButton.click();
 
 		// Verify if page loads
-		// TODO change this to an assertion
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		// TODO wait until page fully loads before making the assertion
+		System.out.println("Page title=" + driver.getTitle());
+		assertTrue(driver.getTitle().contains("Marketplace"));
 
 		ExpectedCondition<Boolean> doesTitleContain = ExpectedConditions.titleContains("Marketplace");
 		System.out.println("Does Title Contain Marketplace? = " + doesTitleContain.apply(driver));
@@ -52,23 +57,26 @@ public class testMarketplaceSearch {
 
 		// Wait until search field is loaded
 		String marketPlaceSearchFieldXpath = ".//*[@id='search-primary']/div/div[2]/form/div[2]/input";
-//		driver.manage().timeouts().implicitlyWait(100000, TimeUnit.SECONDS);
+		// driver.manage().timeouts().implicitlyWait(100000, TimeUnit.SECONDS);
 		// Locate the search input field
 		WebElement marketPlaceSearchField = driver.findElement(By.xpath(marketPlaceSearchFieldXpath));
+
+		// Send a click to the search field before sending keys
+		marketPlaceSearchField.click();
+		System.out.println("Search field clicked");
 
 		// Enter search term: "z14"
 		marketPlaceSearchField.sendKeys("z14");
 		System.out.println("z14 typed");
 
-		//TODO find out how to handle autocompleter
 		// Wait for autocompleter results
-//		driver.manage().timeouts().implicitlyWait(100000, TimeUnit.SECONDS);
-		String autocompleterClass = "react-autosuggest__suggestion--highlight";
-		WebElement autocompleter = driver.findElement(By.className(autocompleterClass));
+		// driver.manage().timeouts().implicitlyWait(100000, TimeUnit.SECONDS);
+		// String autocompleterClass = "react-autosuggest__suggestion--highlight";
+		// WebElement autocompleter = driver.findElement(By.className(autocompleterClass));
 
 		// Submit an Enter key
 		marketPlaceSearchField.sendKeys(Keys.ENTER);
-		System.out.println("Enter keystroek submitted");
+		System.out.println("Enter keystroke submitted");
 
 		// Check result
 		// Expected result: "[some number] result for z14"
