@@ -2,6 +2,7 @@ package seleniumPractice;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import drivers.FirefoxWebDriver;
+import helpers.Screenshot;
 
 //Open IBM.com
 //Click on Marketplace button
@@ -34,6 +36,9 @@ public class testMarketplaceSearch {
 
 	@Test
 	public void testMarketplaceSearchForZ14() {
+		// Take a screenshot
+		Screenshot.takeScreenshot(new File("C:\\Users\\IBM_ADMIN\\Desktop\\TestMarketPlace_Screenshot1.png"), driver);
+		
 		System.out.println("Market Place Search started");
 		// Locate the Marketplace button
 		String marketPlaceButtonXpath = ".//*[@id='ibm-universal-nav']/nav/div[2]/p/a";
@@ -44,7 +49,9 @@ public class testMarketplaceSearch {
 
 		// Verify if page loads
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		// TODO wait until page fully loads before making the assertion
+		
+		// Put the whole execution to sleep
+		System.out.println("Does Title Contain Marketplace before sleep? = ");
 		try {
 			int sleepTime = 50;
 			System.out.println("Thread sleeps " + sleepTime);
@@ -54,14 +61,16 @@ public class testMarketplaceSearch {
 			e.printStackTrace();
 		}
 		System.out.println("Page title=" + driver.getTitle());
-
+		
+		// Wait until an expected condition is met
 		ExpectedCondition<Boolean> doesTitleContain = ExpectedConditions.titleContains("Marketplace");
-		System.out.println("Does Title Contain Marketplace? = " + doesTitleContain.apply(driver));
+		System.out.println("Does Title Contain Marketplace yet? = " + doesTitleContain.apply(driver));
 		while (!doesTitleContain.apply(driver)) {
 			System.out.println("Waiting...");
 		}
-		System.out.println("Does Title Contain Marketplace? = " + doesTitleContain.apply(driver));
+		System.out.println("Does Title Contain Marketplace now? = " + doesTitleContain.apply(driver));
 		assertTrue(driver.getTitle().contains("Marketplace"));
+
 
 		// Wait until search field is loaded
 		String marketPlaceSearchFieldXpath = ".//*[@id='search-primary']/div/div[2]/form/div[2]/input";
@@ -76,6 +85,9 @@ public class testMarketplaceSearch {
 		// Enter search term: "z14"
 		marketPlaceSearchField.sendKeys("z14");
 		System.out.println("z14 typed");
+
+		// Take screenshot
+		Screenshot.takeScreenshot(new File("C:\\Users\\IBM_ADMIN\\Desktop\\TestMarketPlace_Screenshot2.png"), driver);
 
 		// Wait for autocompleter results
 		// driver.manage().timeouts().implicitlyWait(100000, TimeUnit.SECONDS);
@@ -93,6 +105,8 @@ public class testMarketplaceSearch {
 		final Pattern pattern = Pattern.compile(regex);
 		ExpectedCondition<Boolean> isResult = ExpectedConditions.textMatches(By.xpath(foundXpath), pattern);
 		System.out.println("Result is " + isResult.apply(driver));
+		// Take screenshot
+		Screenshot.takeScreenshot(new File("C:\\Users\\IBM_ADMIN\\Desktop\\TestMarketPlace_Screenshot3.png"), driver);
 	}
 
 }

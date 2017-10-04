@@ -28,7 +28,12 @@ public class FindAllElements {
 		for (WebElement option:options){
 			System.out.printf("Option value=%s%n", option.getAttribute("value"));
 			System.out.printf("Option data-localecode=%s%n", option.getAttribute("data-localecode"));
+			System.out.printf("Selected=%b%n", option.isSelected());
 			System.out.println();
+			//click if data-localecod is en-zw
+			if (option.getAttribute("data-localecode").equals("en-zw")){
+				option.click();
+			}
 		}
 	}
 }

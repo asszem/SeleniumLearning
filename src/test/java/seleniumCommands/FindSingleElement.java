@@ -46,6 +46,7 @@ public class FindSingleElement {
 	@Test
 	public void by_LinkText(){
 		WebElement element = driver.findElement(By.linkText("Products"));
+		WebElement element2 = driver.findElement(By.partialLinkText("Prod"));
 	}
 	
 	//@Ignore
