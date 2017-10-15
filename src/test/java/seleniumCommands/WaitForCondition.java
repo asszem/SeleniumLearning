@@ -1,6 +1,5 @@
 package seleniumCommands;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -34,27 +33,33 @@ public class WaitForCondition {
 			public Boolean apply(WebDriver driver) {
 				return driver.findElement(By.tagName("title")).getText().equals("IBM - United Kingdom");
 			}
-		}); //end of anonymous class
+		}); // end of anonymous class
 	}
-	
+
 	/***
 	 * Title must contain "IBM" before timeout
 	 */
 	@Test
-	public void waitUntilTimeoutReached2(){
+	public void waitUntilTimeoutReached2() {
 		WebDriverWait waiter = new WebDriverWait(driver, 3); // timeout in seconds
 		ExpectedCondition<Boolean> condition = ExpectedConditions.titleContains("IBM");
 		waiter.until(condition);
 	}
 
+	@Test
+	public void waitUntilVisibiltiyOfElementLocated() {
+		WebDriverWait waiter = new WebDriverWait(driver, 3); // timeout in seconds
+		waiter.until(ExpectedConditions.visibilityOfElementLocated(By.className("mainContent")));
+	}
+
 	/**
-	 * Infinite loop - until Marketplace button is clicked by YOU. 
+	 * Infinite loop - until Marketplace button is clicked by YOU.
 	 */
 	@Test
-	public void waitForEternity(){
+	public void waitForEternity() {
 		ExpectedCondition<Boolean> condition = ExpectedConditions.titleContains("Marketplace");
 		while (!condition.apply(driver)) {
 		}
 	}
-	
+
 }

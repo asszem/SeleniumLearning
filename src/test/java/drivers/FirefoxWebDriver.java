@@ -27,7 +27,7 @@ public class FirefoxWebDriver {
 			System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/firefox/osx/geckodriver");
 		} else if (OS.contains("windows")) {
 			System.out.println("Windows GeckoDriverX64 started");
-			System.setProperty("webdriver.gecko.driver", "C:\\geckodriverX64.exe");
+			System.setProperty("webdriver.gecko.driver", "C:\\webdrivers\\geckodriverX64.exe");
 		}
 
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
