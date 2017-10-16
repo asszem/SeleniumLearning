@@ -1,6 +1,7 @@
 package seleniumCommands;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,15 @@ public class WaitForCondition {
 	public static void setupBrowser() {
 		driver = new FirefoxWebDriver().initializeFirefoxWebDriver();
 		driver.get("https://ibm.com");
+	}
+
+	//Some examples of ExpectedConditions usage
+	@Ignore
+	@Test
+	public void waitUntilVisibiltiyOfElementLocated() {
+		WebDriverWait waiter = new WebDriverWait(driver, 3); // timeout in seconds
+		waiter.until(ExpectedConditions.visibilityOfElementLocated(By.className("mainContent")));
+		waiter.until(ExpectedConditions.titleContains("Archives"));
 	}
 
 	/**
@@ -46,11 +56,6 @@ public class WaitForCondition {
 		waiter.until(condition);
 	}
 
-	@Test
-	public void waitUntilVisibiltiyOfElementLocated() {
-		WebDriverWait waiter = new WebDriverWait(driver, 3); // timeout in seconds
-		waiter.until(ExpectedConditions.visibilityOfElementLocated(By.className("mainContent")));
-	}
 
 	/**
 	 * Infinite loop - until Marketplace button is clicked by YOU.
