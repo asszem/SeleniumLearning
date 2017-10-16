@@ -58,8 +58,16 @@ public class WaitForCondition {
 	@Test
 	public void waitForEternity() {
 		ExpectedCondition<Boolean> condition = ExpectedConditions.titleContains("Marketplace");
+		long startTime = System.nanoTime();
+		long NANO_TO_SEC = 1000000000;
 		while (!condition.apply(driver)) {
+			long elapsedTime = System.nanoTime() - startTime;
+			if (elapsedTime / NANO_TO_SEC > 10)
+				break;
 		}
+		long stopTime = System.nanoTime();
+		long totalTime = stopTime - startTime;
+		System.out.printf("Nanosec:%d%nSecond:%d%n", totalTime, (totalTime / NANO_TO_SEC));
 	}
 
 }
