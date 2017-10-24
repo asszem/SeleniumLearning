@@ -17,7 +17,7 @@ import drivers.FirefoxWebDriver;
  * 
  * @author Andras Olah
  * 
- * Find single element by various locator methods on IBM.com
+ *         Find single element by various locator methods on IBM.com
  */
 public class FindSingleElement {
 	static WebDriver driver;
@@ -31,8 +31,15 @@ public class FindSingleElement {
 
 	@AfterClass
 	public static void closeFirefox() {
-		//TODO find out why it results incorrect HTTP status
-//		driver.quit();
+		// TODO find out why it results incorrect HTTP status
+		// driver.quit();
+	}
+
+	@Ignore
+	@Test
+	public void by_CSSSelector() {
+		// Find a link where href CONTAINS 'sapenh'
+		driver.findElement(By.cssSelector("a[href*='sapenh']")).click();
 	}
 
 	@Test
@@ -44,19 +51,19 @@ public class FindSingleElement {
 	}
 
 	@Test
-	public void by_LinkText(){
+	public void by_LinkText() {
 		WebElement element = driver.findElement(By.linkText("Products"));
 		WebElement element2 = driver.findElement(By.partialLinkText("Prod"));
 	}
-	
-	//@Ignore
+
+	// @Ignore
 	@Test
 	public void by_Class() {
 		WebElement element = driver.findElement(By.className("ibm-masthead-categories"));
 		System.out.println("By ClassName=" + element.getText());
 	}
 
-	//@Ignore
+	// @Ignore
 	@Test
 	public void by_xPath() {
 		String xPathExpression = ".//*[@id='ibm-home']/a";
@@ -82,17 +89,17 @@ public class FindSingleElement {
 	}
 
 	@Test
-	public void by_Name(){
+	public void by_Name() {
 		WebElement element = driver.findElement(By.name("q"));
 	}
 
 	@Test
 	public void by_Title() {
-		 driver.getTitle().contains("IBM");
+		driver.getTitle().contains("IBM");
 	}
-	
-	@Test(expected=NoSuchElementException.class)
-	public void by_Missing_Element(){	
+
+	@Test(expected = NoSuchElementException.class)
+	public void by_Missing_Element() {
 		WebElement element = driver.findElement(By.className("Should be missing"));
 		System.out.println("Element by name \'Should be missing\' is actually missing");
 

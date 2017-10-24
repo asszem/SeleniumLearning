@@ -28,6 +28,7 @@ public class WaitForCondition {
 		WebDriverWait waiter = new WebDriverWait(driver, 3); // timeout in seconds
 		waiter.until(ExpectedConditions.visibilityOfElementLocated(By.className("mainContent")));
 		waiter.until(ExpectedConditions.titleContains("Archives"));
+		waiter.until(ExpectedConditions.not(ExpectedConditions.titleContains("The Test Room - ")));
 	}
 
 	/**
