@@ -33,3 +33,8 @@ public class HandlingAlerts {
 	    }	
 	}
 }
+
+/*If the alert is an authentication, the easiest way is to provid the following URL 
+ * 
+ * http://username:password@URL
+ * */
