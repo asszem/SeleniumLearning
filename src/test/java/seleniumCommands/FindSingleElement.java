@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import drivers.FirefoxWebDriver;
 
@@ -33,6 +34,15 @@ public class FindSingleElement {
 	public static void closeFirefox() {
 		// TODO find out why it results incorrect HTTP status
 		// driver.quit();
+	}
+
+	@Ignore
+	@Test
+	public void by_DropdownSelect() {
+		String dropDownItem="Test item";
+		WebElement dropDown = driver.findElement(By.className("dropdown"));
+		Select location = new Select(dropDown);
+		location.selectByVisibleText(dropDownItem);
 	}
 
 	@Ignore
